@@ -3,6 +3,7 @@ import { AcoesService } from './acoes.service';
 import { Acoes, AcoesAPI } from './modelo/acoes';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-acoes',
@@ -12,7 +13,7 @@ import { FormControl } from '@angular/forms';
 
 export class AcoesComponent {
   acoesInput = new FormControl();
-  acoes$ = this.acoesService.getAcoes();
+  acoes$ = this.acoesInput.valueChanges.pipe(tap(console.log));
 
   constructor(private acoesService: AcoesService) { }
 }
