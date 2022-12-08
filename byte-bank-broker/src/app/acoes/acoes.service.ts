@@ -12,7 +12,7 @@ export class AcoesService {
 
   getAcoes() {
     return this.httpClient
-      .get<any>('http://localhost:3000/acoes')
+      .get<AcoesAPI>('http://localhost:3000/acoes')
       .pipe(
         tap((valor) => console.log(valor)), //obter o valor dentro do fluxo para analise
         pluck('payload'), // Extrai um atributo de um objeto baseado no nome
