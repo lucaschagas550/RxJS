@@ -3,7 +3,7 @@ import { AcoesService } from './acoes.service';
 import { Acoes, AcoesAPI } from './modelo/acoes';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-acoes',
@@ -19,6 +19,7 @@ export class AcoesComponent {
 
   filtroPeloInput$ = this.acoesInput.valueChanges.pipe(
     tap(() => { console.log('fluxo do filtro') }),
+    filter((valorDigitado: string) => valorDigitado.length >= 3 || !valorDigitado.length), //passe para proxima linha se tiver 3 caracter ou vazio
     switchMap((valorDigitado: string) => this.acoesService.getAcoes(valorDigitado))
   );
 
